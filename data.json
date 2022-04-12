@@ -1,11 +1,11 @@
 {
     "pbhl": {
-        "raid": 27,
-        "noblue": 15,
-        "coronaring": 6,
-        "lineagering": 3,
-        "intricacyring": 2,
-        "goldbar": 1,
+        "raid": 0,
+        "noblue": 0,
+        "coronaring": 0,
+        "lineagering": 0,
+        "intricacyring": 0,
+        "goldbar": 0,
         "hornbefore": "",
         "hornafter": ""
     },
@@ -20,11 +20,11 @@
         "keyafter": ""
     },
     "gohl": {
-        "raid": 8,
-        "azurite": 1,
-        "coronaring": 3,
-        "lineagering": 2,
-        "intricacyring": 2,
+        "raid": 0,
+        "azurite": 0,
+        "coronaring": 0,
+        "lineagering": 0,
+        "intricacyring": 0,
         "goldbar": 0,
         "azuritebefore": "",
         "azuriteafter": ""
