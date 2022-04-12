@@ -14,7 +14,7 @@ I may or may not add a toggle for this in the future.
 
 ---------------
 
-Download the zip file for the compiled .exe files
+Go to the latest release on the sidebar and download the zip file for the compiled .exe files
 
 Use trackerLight.exe for a light theme.
 Use trackerDark.exe for a dark theme.
