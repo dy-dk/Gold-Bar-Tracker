@@ -1,0 +1,32 @@
+{
+    "pbhl": {
+        "raid": 27,
+        "noblue": 15,
+        "coronaring": 6,
+        "lineagering": 3,
+        "intricacyring": 2,
+        "goldbar": 1,
+        "hornbefore": "",
+        "hornafter": ""
+    },
+    "akasha": {
+        "raid": 0,
+        "hollowkey": 0,
+        "coronaring": 0,
+        "lineagering": 0,
+        "intricacyring": 0,
+        "goldbar": 0,
+        "keybefore": "",
+        "keyafter": ""
+    },
+    "gohl": {
+        "raid": 8,
+        "azurite": 1,
+        "coronaring": 3,
+        "lineagering": 2,
+        "intricacyring": 2,
+        "goldbar": 0,
+        "azuritebefore": "",
+        "azuriteafter": ""
+    }
+}
