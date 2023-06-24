@@ -1,4 +1,10 @@
 {
+    "settings": {
+        "resourceTab": ".!notebook.!frame",
+        "goldTab": ".!notebook.!frame.!notebook.!frame",
+        "sandTab": ".!notebook.!frame2.!notebook.!frame",
+        "customTab": ".!notebook.!frame3.!notebook.!frame"
+    },
     "pbhl": {
         "raid": 0,
         "noblue": 0,
@@ -28,5 +34,68 @@
         "goldbar": 0,
         "azuritebefore": "",
         "azuriteafter": ""
+    },
+    "dragon": {
+        "raid": 0,
+        "trash": 0,
+        "earring": 0,
+        "sand": 0,
+        "animabefore": "",
+        "animaafter": ""
+    },
+    "revans": {
+        "raid": 0,
+        "trash": 0,
+        "weapon": 0,
+        "sand": 0,
+        "animabefore": "",
+        "animaafter": ""
+    },
+    "subhl": {
+        "raid": 0,
+        "trash": 0,
+        "sand": 0,
+        "animabefore": "",
+        "animaafter": ""
+    },
+    "custom1": {
+        "raid": 0,
+        "mat1": 0,
+        "mat2": 0,
+        "mat3": 0,
+        "mat4": 0,
+        "mat5": 0,
+        "animabefore": "",
+        "animaafter": ""
+    },
+    "custom2": {
+        "raid": 0,
+        "mat1": 0,
+        "mat2": 0,
+        "mat3": 0,
+        "mat4": 0,
+        "mat5": 0,
+        "animabefore": "",
+        "animaafter": ""
+    },
+    "custom3": {
+        "raid": 0,
+        "mat1": 0,
+        "mat2": 0,
+        "mat3": 0,
+        "mat4": 0,
+        "mat5": 0,
+        "animabefore": "",
+        "animaafter": ""
+    },
+    "custom4": {
+        "raid": 0,
+        "mat1": 0,
+        "mat2": 0,
+        "mat3": 0,
+        "mat4": 0,
+        "mat5": 0,
+        "animabefore": "",
+        "animaafter": ""
     }
 }
