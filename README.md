@@ -1,8 +1,8 @@
 # Gold-Bar-Tracker
 
-Very Cool Gold Bar Tracker.
+Very Cool Gold Bar Tracker that now tracks Sands and custom stuff also.
 
-![gbtracker](https://user-images.githubusercontent.com/103414617/162864738-259e34b0-227f-41b3-a140-617dcadbc4c0.png)
+![image](https://github.com/dy-dk/Gold-Bar-Tracker/assets/103414617/9bfc1224-adb3-45ab-84db-385288dc800e)
 
 Don't judge my coding, I learnt Python just to make this app :)
 Big thanks to Monbanz for helping me create this.
@@ -13,6 +13,9 @@ Let me know if you find any bugs or have suggestions.
 
 App is set to Always be on Top.
 I may or may not add a toggle for this in the future.
+
+Change the files in the img folder if you'd like to customise the app icons.
+The program will automatically resize them but if you'd like to do it manually, the large icons are 50x50px and the small icons are 25x25px.
 
 ---------------
 
@@ -27,7 +30,7 @@ Use trackerDark.exe for a dark theme.
 INSTRUCTIONS:
 
 Left Click to increase count by 1
-Right Click to decrease count by 1
+Right Click or Middle Click to decrease count by 1
 
 Click Reset -> Yes to reset the tab you're on to 0.
 
