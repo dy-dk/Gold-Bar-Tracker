@@ -16,6 +16,7 @@ I may or may not add a toggle for this in the future.
 
 Change the files in the img folder if you'd like to customise the app icons.
 The program will automatically resize them but if you'd like to do it manually, the large icons are 50x50px and the small icons are 25x25px.
+Images MUST be .png files.
 
 If updating from a previous version, replace the data.json file in the zip with your old data.json file.
 
