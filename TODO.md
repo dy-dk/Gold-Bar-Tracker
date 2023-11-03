@@ -1,6 +1,6 @@
 ## refactor / general improvements
 [x] get it running on linux
-[ ] light / dark mode should be a setting not 2 separate files
+[x] light / dark mode should be a setting not 2 separate files
 [ ] code should be OOP style
 [ ] make custom tabs easier to maintain
 
