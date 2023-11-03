@@ -47,9 +47,9 @@ def callBack(input):
         return False
 vcmd = root.register(callBack)
 
-# theme = StringVar(value=drop['settings']['theme'])
+theme = StringVar(value=drop['settings']['theme'])
 style = ThemedStyle(root)
-style.set_theme(drop['settings']['theme'])
+style.set_theme(theme.get())
 
 #tab definition
 tabControl = ttk.Notebook(root)
@@ -179,10 +179,6 @@ custom4mat2Count = IntVar(value=drop['custom4']['mat2'])
 custom4mat3Count = IntVar(value=drop['custom4']['mat3'])
 custom4mat4Count = IntVar(value=drop['custom4']['mat4'])
 custom4mat5Count = IntVar(value=drop['custom4']['mat5'])
-
-# Tab Settings
-theme = StringVar(value=drop['settings']['theme'])
- 
 
 # PBHL
 if pbhlblueCount.get() == 0:
