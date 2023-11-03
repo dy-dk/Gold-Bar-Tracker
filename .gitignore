@@ -1,2 +1,5 @@
+# personal venv
+env/*
+
 # Persistent undo
 [._]*.un~

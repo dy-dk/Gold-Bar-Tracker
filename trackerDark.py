@@ -1731,7 +1731,7 @@ subhlAnimaTextAfter.insert(0, drop['subhl']['animaafter'])
 subhlAnimaTextAfter.bind("<KeyRelease>", subhlAnimaDifference)
 
 # total custom1 raids
-custom1CountImg = tk.PhotoImage(file=imgSrc("custom1Count.png", raid="custom1"))
+custom1CountImg = tk.PhotoImage(file=imgSrc("custom1count.png", raid="custom1"))
 custom1CountImg = resizeImage(custom1CountImg, 50, 50)
 custom1CountLabel = ttk.Label(custom1Tab, image=custom1CountImg).grid(column=0,row=1)
 custom1CounterLabel = ttk.Label(custom1Tab, textvariable=custom1raidCount).grid(column=0, row=2)
@@ -1835,7 +1835,7 @@ custom1TextAfter.insert(0, drop['custom1']['animaafter'])
 custom1TextAfter.bind("<KeyRelease>", custom1MatsDifference)
 
 # total custom2 raids
-custom2CountImg = tk.PhotoImage(file=imgSrc("custom2Count.png", raid="custom2"))
+custom2CountImg = tk.PhotoImage(file=imgSrc("custom2count.png", raid="custom2"))
 custom2CountImg = resizeImage(custom2CountImg, 50, 50)
 custom2CountLabel = ttk.Label(custom2Tab, image=custom2CountImg).grid(column=0,row=1)
 custom2CounterLabel = ttk.Label(custom2Tab, textvariable=custom2raidCount).grid(column=0, row=2)
@@ -1939,7 +1939,7 @@ custom2TextAfter.insert(0, drop['custom2']['animaafter'])
 custom2TextAfter.bind("<KeyRelease>", custom2MatsDifference)
 
 # total custom3 raids
-custom3CountImg = tk.PhotoImage(file=imgSrc("custom3Count.png", raid="custom3"))
+custom3CountImg = tk.PhotoImage(file=imgSrc("custom3count.png", raid="custom3"))
 custom3CountImg = resizeImage(custom3CountImg, 50, 50)
 custom3CountLabel = ttk.Label(custom3Tab, image=custom3CountImg).grid(column=0,row=1)
 custom3CounterLabel = ttk.Label(custom3Tab, textvariable=custom3raidCount).grid(column=0, row=2)
@@ -2043,7 +2043,7 @@ custom3TextAfter.insert(0, drop['custom3']['animaafter'])
 custom3TextAfter.bind("<KeyRelease>", custom3MatsDifference)
 
 # total custom4 raids
-custom4CountImg = tk.PhotoImage(file=imgSrc("custom4Count.png", raid="custom4"))
+custom4CountImg = tk.PhotoImage(file=imgSrc("custom4count.png", raid="custom4"))
 custom4CountImg = resizeImage(custom4CountImg, 50, 50)
 custom4CountLabel = ttk.Label(custom4Tab, image=custom4CountImg).grid(column=0,row=1)
 custom4CounterLabel = ttk.Label(custom4Tab, textvariable=custom4raidCount).grid(column=0, row=2)
