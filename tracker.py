@@ -20,7 +20,7 @@ def fileSrc(file):
         filepath = os.path.dirname(sys.executable)
     elif __file__:
         filepath, filename = os.path.split(os.path.realpath(__file__))
-    return os.path.join(filepath,file) 
+    return os.path.join(filepath,file)
 
 def resizeImage(img, newWidth, newHeight):
     pilImage = ImageTk.getimage(img).convert("RGBA")
@@ -28,6 +28,10 @@ def resizeImage(img, newWidth, newHeight):
     newImg = pilImage.resize((newWidth, newHeight), Image.LANCZOS)
     newPhotoImage = ImageTk.PhotoImage(newImg)
     return newPhotoImage
+
+#load data from json
+with open(fileSrc('data.json')) as file:
+    drop = json.load(file)
 
 root = tk.Tk()
 root.title("Drop Tracker")
@@ -43,8 +47,9 @@ def callBack(input):
         return False
 vcmd = root.register(callBack)
 
+# theme = StringVar(value=drop['settings']['theme'])
 style = ThemedStyle(root)
-#style.set_theme("arc")
+style.set_theme(drop['settings']['theme'])
 
 #tab definition
 tabControl = ttk.Notebook(root)
@@ -52,15 +57,20 @@ tabControl = ttk.Notebook(root)
 barTab = ttk.Frame(tabControl)
 sandTab = ttk.Frame(tabControl)
 customTab = ttk.Frame(tabControl)
+settingsTab = ttk.Frame(tabControl)
+
 tabControlSand = ttk.Notebook(sandTab)
 tabControlBar = ttk.Notebook(barTab)
 tabControlCustom = ttk.Notebook(customTab)
+tabControlSettings = ttk.Notebook(settingsTab)
+
 pbhlTab = ttk.Frame(tabControlBar)
 akashaTab = ttk.Frame(tabControlBar)
 gohlTab = ttk.Frame(tabControlBar)
 dragonTab = ttk.Frame(tabControlSand)
 revansTab = ttk.Frame(tabControlSand)
 subhlTab = ttk.Frame(tabControlSand)
+
 custom1Tab = ttk.Frame(tabControlCustom)
 custom2Tab = ttk.Frame(tabControlCustom)
 custom3Tab = ttk.Frame(tabControlCustom)
@@ -69,9 +79,11 @@ custom4Tab = ttk.Frame(tabControlCustom)
 tabControlBar.add(pbhlTab, text='PBHL')
 tabControlBar.add(akashaTab, text='Akasha')
 tabControlBar.add(gohlTab, text='GOHL')
+
 tabControlSand.add(dragonTab, text='Dragons')
 tabControlSand.add(revansTab, text='Revans')
 tabControlSand.add(subhlTab, text='SUBHL')
+
 tabControlCustom.add(custom1Tab, text='Custom 1')
 tabControlCustom.add(custom2Tab, text='Custom 2')
 tabControlCustom.add(custom3Tab, text='Custom 3')
@@ -84,92 +96,93 @@ customImg = ImageTk.PhotoImage((Image.open(imgSrc("custom.png"))).resize((20,20)
 tabControl.add(barTab, text="Gold Bar", image=barImg, compound="left")
 tabControl.add(sandTab, text='Eternity Sand', image=sandImg, compound="left")
 tabControl.add(customTab, text='Custom', image=customImg, compound="left")
+tabControl.add(settingsTab, text='Settings', image=customImg, compound="left")
 tabControl.pack(expand=1, fill="both")
 tabControlBar.pack(expand=1, fill="both")
 tabControlSand.pack(expand=1, fill="both")
 tabControlCustom.pack(expand=1, fill="both")
 
-#load data from json
-with open(fileSrc('data.json')) as file:
-    drop = json.load(file)
-
 # counter var def
 
 # Tab PBHL
-pbhlraidCount = IntVar(value=drop.get("pbhl", {}).get("raid", 0))
-noblueCount = IntVar(value=drop.get("pbhl", {}).get("noblue", 0))
-pbhlcoronaringCount = IntVar(value=drop.get("pbhl", {}).get("coronaring", 0))
-pbhllineageringCount = IntVar(value=drop.get("pbhl", {}).get("lineagering", 0))
-pbhlintricacyringCount = IntVar(value=drop.get("pbhl", {}).get("intricacyring", 0))
-pbhlgoldbarCount = IntVar(value=drop.get("pbhl", {}).get("goldbar", 0))
+pbhlraidCount = IntVar(value=drop['pbhl']['raid'])
+noblueCount = IntVar(value=drop['pbhl']['noblue'])
+pbhlcoronaringCount = IntVar(value=drop['pbhl']['coronaring'])
+pbhllineageringCount = IntVar(value=drop['pbhl']['lineagering'])
+pbhlintricacyringCount = IntVar(value=drop['pbhl']['intricacyring'])
+pbhlgoldbarCount = IntVar(value=drop['pbhl']['goldbar'])
 pbhlblueCount = IntVar(value=pbhlraidCount.get()-noblueCount.get())
 pbhlbluePercent = StringVar(value="Dokkan")
 pbhlblueText = StringVar(value="Total: " + str(pbhlblueCount.get()) + "\n" + "Drop Rate: " + str(pbhlbluePercent.get()))
 
 # Tab Akasha
-raidCount = IntVar(value=drop.get("akasha", {}).get("raid", 0))
-hollowkeyCount = IntVar(value=drop.get("akasha", {}).get("hollowkey", 0))
-coronaringCount = IntVar(value=drop.get("akasha", {}).get("coronaring", 0))
-lineageringCount = IntVar(value=drop.get("akasha", {}).get("lineagering", 0))
-intricacyringCount = IntVar(value=drop.get("akasha", {}).get("intricacyring", 0))
-goldbarCount = IntVar(value=drop.get("akasha", {}).get("goldbar", 0))
+raidCount = IntVar(value=drop['akasha']['raid'])
+hollowkeyCount = IntVar(value=drop['akasha']['hollowkey'])
+coronaringCount = IntVar(value=drop['akasha']['coronaring'])
+lineageringCount = IntVar(value=drop['akasha']['lineagering'])
+intricacyringCount = IntVar(value=drop['akasha']['intricacyring'])
+goldbarCount = IntVar(value=drop['akasha']['goldbar'])
 
 # Tab GOHL
-gohlraidCount = IntVar(value=drop.get("gohl", {}).get("raid", 0))
-azuriteCount = IntVar(value=drop.get("gohl", {}).get("azurite", 0))
-gohlcoronaringCount = IntVar(value=drop.get("gohl", {}).get("coronaring", 0))
-gohllineageringCount = IntVar(value=drop.get("gohl", {}).get("lineagering", 0))
-gohlintricacyringCount = IntVar(value=drop.get("gohl", {}).get("intricacyring", 0))
-gohlgoldbarCount = IntVar(value=drop.get("gohl", {}).get("goldbar", 0))
+gohlraidCount = IntVar(value=drop['gohl']['raid'])
+azuriteCount = IntVar(value=drop['gohl']['azurite'])
+gohlcoronaringCount = IntVar(value=drop['gohl']['coronaring'])
+gohllineageringCount = IntVar(value=drop['gohl']['lineagering'])
+gohlintricacyringCount = IntVar(value=drop['gohl']['intricacyring'])
+gohlgoldbarCount = IntVar(value=drop['gohl']['goldbar'])
 
 # Tab Dragons
-dragonraidCount = IntVar(value=drop.get("dragon", {}).get("raid", 0))
-dragontrashCount = IntVar(value=drop.get("dragon", {}).get("trash", 0))
-dragonearringCount = IntVar(value=drop.get("dragon", {}).get("earring", 0))
-dragonsandCount = IntVar(value=drop.get("dragon", {}).get("sand", 0))
+dragonraidCount = IntVar(value=drop['dragon']['raid'])
+dragontrashCount = IntVar(value=drop['dragon']['trash'])
+dragonearringCount = IntVar(value=drop['dragon']['earring'])
+dragonsandCount = IntVar(value=drop['dragon']['sand'])
 
 # Tab Revans
-revansraidCount = IntVar(value=drop.get("revans", {}).get("raid", 0))
-revanstrashCount = IntVar(value=drop.get("revans", {}).get("trash", 0))
-revansweaponCount = IntVar(value=drop.get("revans", {}).get("weapon", 0))
-revanssandCount = IntVar(value=drop.get("revans", {}).get("sand", 0))
+revansraidCount = IntVar(value=drop['revans']['raid'])
+revanstrashCount = IntVar(value=drop['revans']['trash'])
+revansweaponCount = IntVar(value=drop['revans']['weapon'])
+revanssandCount = IntVar(value=drop['revans']['sand'])
 
 # Tab SUBHL
-subhlraidCount = IntVar(value=drop.get("subhl", {}).get("raid", 0))
-subhltrashCount = IntVar(value=drop.get("subhl", {}).get("trash", 0))
-subhlsandCount = IntVar(value=drop.get("subhl", {}).get("sand", 0))
+subhlraidCount = IntVar(value=drop['subhl']['raid'])
+subhltrashCount = IntVar(value=drop['subhl']['trash'])
+subhlsandCount = IntVar(value=drop['subhl']['sand'])
 
 # Tab Custom1
-custom1raidCount = IntVar(value=drop.get("custom1", {}).get("raid", 0))
-custom1mat1Count = IntVar(value=drop.get("custom1", {}).get("mat1", 0))
-custom1mat2Count = IntVar(value=drop.get("custom1", {}).get("mat2", 0))
-custom1mat3Count = IntVar(value=drop.get("custom1", {}).get("mat3", 0))
-custom1mat4Count = IntVar(value=drop.get("custom1", {}).get("mat4", 0))
-custom1mat5Count = IntVar(value=drop.get("custom1", {}).get("mat5", 0))
+custom1raidCount = IntVar(value=drop['custom1']['raid'])
+custom1mat1Count = IntVar(value=drop['custom1']['mat1'])
+custom1mat2Count = IntVar(value=drop['custom1']['mat2'])
+custom1mat3Count = IntVar(value=drop['custom1']['mat3'])
+custom1mat4Count = IntVar(value=drop['custom1']['mat4'])
+custom1mat5Count = IntVar(value=drop['custom1']['mat5'])
 
 # Tab Custom2
-custom2raidCount = IntVar(value=drop.get("custom2", {}).get("raid", 0))
-custom2mat1Count = IntVar(value=drop.get("custom2", {}).get("mat1", 0))
-custom2mat2Count = IntVar(value=drop.get("custom2", {}).get("mat2", 0))
-custom2mat3Count = IntVar(value=drop.get("custom2", {}).get("mat3", 0))
-custom2mat4Count = IntVar(value=drop.get("custom2", {}).get("mat4", 0))
-custom2mat5Count = IntVar(value=drop.get("custom2", {}).get("mat5", 0))
+custom2raidCount = IntVar(value=drop['custom2']['raid'])
+custom2mat1Count = IntVar(value=drop['custom2']['mat1'])
+custom2mat2Count = IntVar(value=drop['custom2']['mat2'])
+custom2mat3Count = IntVar(value=drop['custom2']['mat3'])
+custom2mat4Count = IntVar(value=drop['custom2']['mat4'])
+custom2mat5Count = IntVar(value=drop['custom2']['mat5'])
 
 # Tab Custom3
-custom3raidCount = IntVar(value=drop.get("custom3", {}).get("raid", 0))
-custom3mat1Count = IntVar(value=drop.get("custom3", {}).get("mat1", 0))
-custom3mat2Count = IntVar(value=drop.get("custom3", {}).get("mat2", 0))
-custom3mat3Count = IntVar(value=drop.get("custom3", {}).get("mat3", 0))
-custom3mat4Count = IntVar(value=drop.get("custom3", {}).get("mat4", 0))
-custom3mat5Count = IntVar(value=drop.get("custom3", {}).get("mat5", 0))
+custom3raidCount = IntVar(value=drop['custom3']['raid'])
+custom3mat1Count = IntVar(value=drop['custom3']['mat1'])
+custom3mat2Count = IntVar(value=drop['custom3']['mat2'])
+custom3mat3Count = IntVar(value=drop['custom3']['mat3'])
+custom3mat4Count = IntVar(value=drop['custom3']['mat4'])
+custom3mat5Count = IntVar(value=drop['custom3']['mat5'])
 
 # Tab Custom4
-custom4raidCount = IntVar(value=drop.get("custom4", {}).get("raid", 0))
-custom4mat1Count = IntVar(value=drop.get("custom4", {}).get("mat1", 0))
-custom4mat2Count = IntVar(value=drop.get("custom4", {}).get("mat2", 0))
-custom4mat3Count = IntVar(value=drop.get("custom4", {}).get("mat3", 0))
-custom4mat4Count = IntVar(value=drop.get("custom4", {}).get("mat4", 0))
-custom4mat5Count = IntVar(value=drop.get("custom4", {}).get("mat5", 0))
+custom4raidCount = IntVar(value=drop['custom4']['raid'])
+custom4mat1Count = IntVar(value=drop['custom4']['mat1'])
+custom4mat2Count = IntVar(value=drop['custom4']['mat2'])
+custom4mat3Count = IntVar(value=drop['custom4']['mat3'])
+custom4mat4Count = IntVar(value=drop['custom4']['mat4'])
+custom4mat5Count = IntVar(value=drop['custom4']['mat5'])
+
+# Tab Settings
+theme = StringVar(value=drop['settings']['theme'])
+ 
 
 # PBHL
 if pbhlblueCount.get() == 0:
@@ -309,7 +322,9 @@ def saveData():
         'resourceTab':  tabControl.select(),
         'goldTab':  tabControlBar.select(),
         'sandTab':  tabControlSand.select(),
-        'customTab':  tabControlCustom.select()
+        'customTab':  tabControlCustom.select(),
+        'settingsTab':  tabControlSettings.select(),
+        'theme': theme.get()
     }
     drop['pbhl'] = {
         'raid': pbhlraidCount.get(),
@@ -456,19 +471,19 @@ def buttonCallBack(item):
     if(item=="hollowkey"):
         hollowkeyCount.set(hollowkeyCount.get()+1)
     elif(item == "coronaring"):
-        coronaringCount.set(coronaringCount.get()+1) 
+        coronaringCount.set(coronaringCount.get()+1)
     elif(item == "lineagering"):
         lineageringCount.set(lineageringCount.get()+1)
     elif(item == "intricacyring"):
-        intricacyringCount.set(intricacyringCount.get()+1)  
+        intricacyringCount.set(intricacyringCount.get()+1)
     elif(item == "goldbar"):
-        goldbarCount.set(goldbarCount.get()+1) 
+        goldbarCount.set(goldbarCount.get()+1)
 
     hollowkeyPercentage.set(str(round(hollowkeyCount.get()/raidCount.get()*100,2)) + "%")
-    coronaringPercentage.set(str(round(coronaringCount.get()/raidCount.get()*100,2)) + "%") 
+    coronaringPercentage.set(str(round(coronaringCount.get()/raidCount.get()*100,2)) + "%")
     lineageringPercentage.set(str(round(lineageringCount.get()/raidCount.get()*100,2)) + "%")
     intricacyringPercentage.set(str(round(intricacyringCount.get()/raidCount.get()*100,2)) + "%")
-    goldbarPercentage.set(str(round(goldbarCount.get()/raidCount.get()*100,2)) + "%")      
+    goldbarPercentage.set(str(round(goldbarCount.get()/raidCount.get()*100,2)) + "%")
 
     saveData()
 
@@ -1290,6 +1305,11 @@ def custom4resetCount():
         return
     saveData()
 
+def themeSetting(themeColor):
+    theme.set(themeColor)
+    style.set_theme(theme.get())
+    saveData()
+
 # GUI Layout / render
 
 # total pbhl raids
@@ -1538,14 +1558,14 @@ dragonsandButton.bind('<Button-3>', lambda event: dragonTakeBack("sand"))
 dragonresetButton = ttk.Button(dragonTab, text="Reset", command=lambda:dragonresetCount(), width=12).grid(padx= [45,0], column=6, row=5)
 
 # Dragon Anima Count
-if drop.get("dragon", {}).get("animabefore", 0) == "" and drop.get("dragon", {}).get("animaafter", 0) =="":
+if drop['dragon']['animabefore'] == "" and drop['dragon']['animaafter'] =="":
     dragonAnimaSinceLabel = StringVar(value="Mats since:" + "\n" + "0")
-elif drop.get("dragon", {}).get("animabefore", 0) == "":
-    dragonAnimaSinceLabel = StringVar(value="Mats since:" + "\n" + str(abs(int(drop.get("dragon", {}).get("animaafter", 0)))))
-elif drop.get("dragon", {}).get("animaafter", 0) == "":
-    dragonAnimaSinceLabel = StringVar(value="Mats since:" + "\n" + str(abs(int(drop.get("dragon", {}).get("animabefore", 0)))))
+elif drop['dragon']['animabefore'] == "":
+    dragonAnimaSinceLabel = StringVar(value="Mats since:" + "\n" + str(abs(int(drop['dragon']['animaafter']))))
+elif drop['dragon']['animaafter'] == "":
+    dragonAnimaSinceLabel = StringVar(value="Mats since:" + "\n" + str(abs(int(drop['dragon']['animabefore']))))
 else:
-    dragonAnimaSinceLabel = StringVar(value="Mats since:" + "\n" + str(abs(int(drop.get("dragon", {}).get("animabefore", 0))-int(drop.get("dragon", {}).get("animaafter", 0)))))
+    dragonAnimaSinceLabel = StringVar(value="Mats since:" + "\n" + str(abs(int(drop['dragon']['animabefore'])-int(drop['dragon']['animaafter']))))
 
 def dragonAnimaDifference(e):
     if dragonAnimaTextAfter.get() == "" and dragonAnimaTextBefore.get() == "":
@@ -1569,12 +1589,12 @@ dragonAnimaText.grid(column=0, columnspan=2, row=5, sticky= tk.NW)
 
 dragonAnimaTextBefore = ttk.Entry(dragonTab, width=12, validate='key', validatecommand=(vcmd, '%P'))
 dragonAnimaTextBefore.grid(column=1, columnspan=2, row=4)
-dragonAnimaTextBefore.insert(0, drop.get("dragon", {}).get("animabefore", 0))
+dragonAnimaTextBefore.insert(0, drop['dragon']['animabefore'])
 dragonAnimaTextBefore.bind("<KeyRelease>", dragonAnimaDifference)
 
 dragonAnimaTextAfter = ttk.Entry(dragonTab, width=12, validate='key', validatecommand=(vcmd, '%P'))
 dragonAnimaTextAfter.grid(column=1, columnspan=2, row=5)
-dragonAnimaTextAfter.insert(0, drop.get("dragon", {}).get("animaafter", 0))
+dragonAnimaTextAfter.insert(0, drop['dragon']['animaafter'])
 dragonAnimaTextAfter.bind("<KeyRelease>", dragonAnimaDifference)
 
 # total revans raids
@@ -1620,14 +1640,14 @@ revanssandButton.bind('<Button-3>', lambda event: revansTakeBack("sand"))
 revansresetButton = ttk.Button(revansTab, text="Reset", command=lambda:revansresetCount(), width=12).grid(padx= [45,0],column=6, row=5)
 
 # revans Anima Count
-if drop.get("revans", {}).get("animabefore", 0) == "" and drop.get("revans", {}).get("animaafter", 0) =="":
+if drop['revans']['animabefore'] == "" and drop['revans']['animaafter'] =="":
     revansAnimaSinceLabel = StringVar(value="Mats since:" + "\n" + "0")
-elif drop.get("revans", {}).get("animabefore", 0) == "":
-    revansAnimaSinceLabel = StringVar(value="Mats since:" + "\n" + str(abs(int(drop.get("revans", {}).get("animaafter", 0)))))
-elif drop.get("revans", {}).get("animaafter", 0) == "":
-    revansAnimaSinceLabel = StringVar(value="Mats since:" + "\n" + str(abs(int(drop.get("revans", {}).get("animabefore", 0)))))
+elif drop['revans']['animabefore'] == "":
+    revansAnimaSinceLabel = StringVar(value="Mats since:" + "\n" + str(abs(int(drop['revans']['animaafter']))))
+elif drop['revans']['animaafter'] == "":
+    revansAnimaSinceLabel = StringVar(value="Mats since:" + "\n" + str(abs(int(drop['revans']['animabefore']))))
 else:
-    revansAnimaSinceLabel = StringVar(value="Mats since:" + "\n" + str(abs(int(drop.get("revans", {}).get("animabefore", 0))-int(drop.get("revans", {}).get("animaafter", 0)))))
+    revansAnimaSinceLabel = StringVar(value="Mats since:" + "\n" + str(abs(int(drop['revans']['animabefore'])-int(drop['revans']['animaafter']))))
 
 def revansAnimaDifference(e):
     if revansAnimaTextAfter.get() == "" and revansAnimaTextBefore.get() == "":
@@ -1651,12 +1671,12 @@ revansAnimaText.grid(column=0, columnspan=2, row=5, sticky= tk.NW)
 
 revansAnimaTextBefore = ttk.Entry(revansTab, width=12, validate='key', validatecommand=(vcmd, '%P'))
 revansAnimaTextBefore.grid(column=1, columnspan=2, row=4)
-revansAnimaTextBefore.insert(0, drop.get("revans", {}).get("animabefore", 0))
+revansAnimaTextBefore.insert(0, drop['revans']['animabefore'])
 revansAnimaTextBefore.bind("<KeyRelease>", revansAnimaDifference)
 
 revansAnimaTextAfter = ttk.Entry(revansTab, width=12, validate='key', validatecommand=(vcmd, '%P'))
 revansAnimaTextAfter.grid(column=1, columnspan=2, row=5)
-revansAnimaTextAfter.insert(0, drop.get("revans", {}).get("animaafter", 0))
+revansAnimaTextAfter.insert(0, drop['revans']['animaafter'])
 revansAnimaTextAfter.bind("<KeyRelease>", revansAnimaDifference)
 
 # total subhl raids
@@ -1691,14 +1711,14 @@ subhlsandButton.bind('<Button-3>', lambda event: subhlTakeBack("sand"))
 subhlresetButton = ttk.Button(subhlTab, text="Reset", command=lambda:subhlresetCount(), width=12).grid(padx= [102,0], column=4, row=5)
 
 # subhl Anima Count
-if drop.get("subhl", {}).get("animabefore", 0) == "" and drop.get("subhl", {}).get("animaafter", 0) =="":
+if drop['subhl']['animabefore'] == "" and drop['subhl']['animaafter'] =="":
     subhlAnimaSinceLabel = StringVar(value="Prisms:" + "\n" + "0")
-elif drop.get("subhl", {}).get("animabefore", 0) == "":
-    subhlAnimaSinceLabel = StringVar(value="Prisms:" + "\n" + str(abs(int(drop.get("subhl", {}).get("animaafter", 0)))))
-elif drop.get("subhl", {}).get("animaafter", 0) == "":
-    subhlAnimaSinceLabel = StringVar(value="Prisms:" + "\n" + str(abs(int(drop.get("subhl", {}).get("animabefore", 0)))))
+elif drop['subhl']['animabefore'] == "":
+    subhlAnimaSinceLabel = StringVar(value="Prisms:" + "\n" + str(abs(int(drop['subhl']['animaafter']))))
+elif drop['subhl']['animaafter'] == "":
+    subhlAnimaSinceLabel = StringVar(value="Prisms:" + "\n" + str(abs(int(drop['subhl']['animabefore']))))
 else:
-    subhlAnimaSinceLabel = StringVar(value="Prisms:" + "\n" + str(abs(int(drop.get("subhl", {}).get("animabefore", 0))-int(drop.get("subhl", {}).get("animaafter", 0)))))
+    subhlAnimaSinceLabel = StringVar(value="Prisms:" + "\n" + str(abs(int(drop['subhl']['animabefore'])-int(drop['subhl']['animaafter']))))
 
 def subhlAnimaDifference(e):
     if subhlAnimaTextAfter.get() == "" and subhlAnimaTextBefore.get() == "":
@@ -1722,12 +1742,12 @@ subhlAnimaText.grid(column=0, columnspan=2, row=5, sticky= tk.NW)
 
 subhlAnimaTextBefore = ttk.Entry(subhlTab, width=12, validate='key', validatecommand=(vcmd, '%P'))
 subhlAnimaTextBefore.grid(column=1, columnspan=2, row=4)
-subhlAnimaTextBefore.insert(0, drop.get("subhl", {}).get("animabefore", 0))
+subhlAnimaTextBefore.insert(0, drop['subhl']['animabefore'])
 subhlAnimaTextBefore.bind("<KeyRelease>", subhlAnimaDifference)
 
 subhlAnimaTextAfter = ttk.Entry(subhlTab, width=12, validate='key', validatecommand=(vcmd, '%P'))
 subhlAnimaTextAfter.grid(column=1, columnspan=2, row=5)
-subhlAnimaTextAfter.insert(0, drop.get("subhl", {}).get("animaafter", 0))
+subhlAnimaTextAfter.insert(0, drop['subhl']['animaafter'])
 subhlAnimaTextAfter.bind("<KeyRelease>", subhlAnimaDifference)
 
 # total custom1 raids
@@ -1795,14 +1815,14 @@ custom1mat5Button.bind('<Button-3>', lambda event: custom1TakeBack("mat5"))
 custom1resetButton = ttk.Button(custom1Tab, text="Reset", command=lambda:custom1resetCount(), width=12).grid(column=5, row=5)
 
 # custom1 Mat Count
-if drop.get("custom1", {}).get("animabefore", 0) == "" and drop.get("custom1", {}).get("animaafter", 0) =="":
+if drop['custom1']['animabefore'] == "" and drop['custom1']['animaafter'] =="":
     custom1SinceLabel = StringVar(value="Mats since:" + "\n" + "0")
-elif drop.get("custom1", {}).get("animabefore", 0) == "":
-    custom1SinceLabel = StringVar(value="Mats since:" + "\n" + str(abs(int(drop.get("custom1", {}).get("animaafter", 0)))))
-elif drop.get("custom1", {}).get("animaafter", 0) == "":
-    custom1SinceLabel = StringVar(value="Mats since:" + "\n" + str(abs(int(drop.get("custom1", {}).get("animabefore", 0)))))
+elif drop['custom1']['animabefore'] == "":
+    custom1SinceLabel = StringVar(value="Mats since:" + "\n" + str(abs(int(drop['custom1']['animaafter']))))
+elif drop['custom1']['animaafter'] == "":
+    custom1SinceLabel = StringVar(value="Mats since:" + "\n" + str(abs(int(drop['custom1']['animabefore']))))
 else:
-    custom1SinceLabel = StringVar(value="Mats since:" + "\n" + str(abs(int(drop.get("custom1", {}).get("animabefore", 0))-int(drop.get("custom1", {}).get("animaafter", 0)))))
+    custom1SinceLabel = StringVar(value="Mats since:" + "\n" + str(abs(int(drop['custom1']['animabefore'])-int(drop['custom1']['animaafter']))))
 
 def custom1MatsDifference(e):
     if custom1TextAfter.get() == "" and custom1TextBefore.get() == "":
@@ -1826,12 +1846,12 @@ custom1Text.grid(column=0, columnspan=2, row=5, sticky= tk.NW)
 
 custom1TextBefore = ttk.Entry(custom1Tab, width=12, validate='key', validatecommand=(vcmd, '%P'))
 custom1TextBefore.grid(column=1, columnspan=2, row=4)
-custom1TextBefore.insert(0, drop.get("custom1", {}).get("animabefore", 0))
+custom1TextBefore.insert(0, drop['custom1']['animabefore'])
 custom1TextBefore.bind("<KeyRelease>", custom1MatsDifference)
 
 custom1TextAfter = ttk.Entry(custom1Tab, width=12, validate='key', validatecommand=(vcmd, '%P'))
 custom1TextAfter.grid(column=1, columnspan=2, row=5)
-custom1TextAfter.insert(0, drop.get("custom1", {}).get("animaafter", 0))
+custom1TextAfter.insert(0, drop['custom1']['animaafter'])
 custom1TextAfter.bind("<KeyRelease>", custom1MatsDifference)
 
 # total custom2 raids
@@ -1899,14 +1919,14 @@ custom2mat5Button.bind('<Button-3>', lambda event: custom2TakeBack("mat5"))
 custom2resetButton = ttk.Button(custom2Tab, text="Reset", command=lambda:custom2resetCount(), width=12).grid(column=5, row=5)
 
 # custom2 Mat Count
-if drop.get("custom2", {}).get("animabefore", 0) == "" and drop.get("custom2", {}).get("animaafter", 0) =="":
+if drop['custom2']['animabefore'] == "" and drop['custom2']['animaafter'] =="":
     custom2SinceLabel = StringVar(value="Mats since:" + "\n" + "0")
-elif drop.get("custom2", {}).get("animabefore", 0) == "":
-    custom2SinceLabel = StringVar(value="Mats since:" + "\n" + str(abs(int(drop.get("custom2", {}).get("animaafter", 0)))))
-elif drop.get("custom2", {}).get("animaafter", 0) == "":
-    custom2SinceLabel = StringVar(value="Mats since:" + "\n" + str(abs(int(drop.get("custom2", {}).get("animabefore", 0)))))
+elif drop['custom2']['animabefore'] == "":
+    custom2SinceLabel = StringVar(value="Mats since:" + "\n" + str(abs(int(drop['custom2']['animaafter']))))
+elif drop['custom2']['animaafter'] == "":
+    custom2SinceLabel = StringVar(value="Mats since:" + "\n" + str(abs(int(drop['custom2']['animabefore']))))
 else:
-    custom2SinceLabel = StringVar(value="Mats since:" + "\n" + str(abs(int(drop.get("custom2", {}).get("animabefore", 0))-int(drop.get("custom2", {}).get("animaafter", 0)))))
+    custom2SinceLabel = StringVar(value="Mats since:" + "\n" + str(abs(int(drop['custom2']['animabefore'])-int(drop['custom2']['animaafter']))))
 
 def custom2MatsDifference(e):
     if custom2TextAfter.get() == "" and custom2TextBefore.get() == "":
@@ -1930,12 +1950,12 @@ custom2Text.grid(column=0, columnspan=2, row=5, sticky= tk.NW)
 
 custom2TextBefore = ttk.Entry(custom2Tab, width=12, validate='key', validatecommand=(vcmd, '%P'))
 custom2TextBefore.grid(column=1, columnspan=2, row=4)
-custom2TextBefore.insert(0, drop.get("custom2", {}).get("animabefore", 0))
+custom2TextBefore.insert(0, drop['custom2']['animabefore'])
 custom2TextBefore.bind("<KeyRelease>", custom2MatsDifference)
 
 custom2TextAfter = ttk.Entry(custom2Tab, width=12, validate='key', validatecommand=(vcmd, '%P'))
 custom2TextAfter.grid(column=1, columnspan=2, row=5)
-custom2TextAfter.insert(0, drop.get("custom2", {}).get("animaafter", 0))
+custom2TextAfter.insert(0, drop['custom2']['animaafter'])
 custom2TextAfter.bind("<KeyRelease>", custom2MatsDifference)
 
 # total custom3 raids
@@ -2003,14 +2023,14 @@ custom3mat5Button.bind('<Button-3>', lambda event: custom3TakeBack("mat5"))
 custom3resetButton = ttk.Button(custom3Tab, text="Reset", command=lambda:custom3resetCount(), width=12).grid(column=5, row=5)
 
 # custom3 Mat Count
-if drop.get("custom3", {}).get("animabefore", 0) == "" and drop.get("custom3", {}).get("animaafter", 0) =="":
+if drop['custom3']['animabefore'] == "" and drop['custom3']['animaafter'] =="":
     custom3SinceLabel = StringVar(value="Mats since:" + "\n" + "0")
-elif drop.get("custom3", {}).get("animabefore", 0) == "":
-    custom3SinceLabel = StringVar(value="Mats since:" + "\n" + str(abs(int(drop.get("custom3", {}).get("animaafter", 0)))))
-elif drop.get("custom3", {}).get("animaafter", 0) == "":
-    custom3SinceLabel = StringVar(value="Mats since:" + "\n" + str(abs(int(drop.get("custom3", {}).get("animabefore", 0)))))
+elif drop['custom3']['animabefore'] == "":
+    custom3SinceLabel = StringVar(value="Mats since:" + "\n" + str(abs(int(drop['custom3']['animaafter']))))
+elif drop['custom3']['animaafter'] == "":
+    custom3SinceLabel = StringVar(value="Mats since:" + "\n" + str(abs(int(drop['custom3']['animabefore']))))
 else:
-    custom3SinceLabel = StringVar(value="Mats since:" + "\n" + str(abs(int(drop.get("custom3", {}).get("animabefore", 0))-int(drop.get("custom3", {}).get("animaafter", 0)))))
+    custom3SinceLabel = StringVar(value="Mats since:" + "\n" + str(abs(int(drop['custom3']['animabefore'])-int(drop['custom3']['animaafter']))))
 
 def custom3MatsDifference(e):
     if custom3TextAfter.get() == "" and custom3TextBefore.get() == "":
@@ -2034,12 +2054,12 @@ custom3Text.grid(column=0, columnspan=2, row=5, sticky= tk.NW)
 
 custom3TextBefore = ttk.Entry(custom3Tab, width=12, validate='key', validatecommand=(vcmd, '%P'))
 custom3TextBefore.grid(column=1, columnspan=2, row=4)
-custom3TextBefore.insert(0, drop.get("custom3", {}).get("animabefore", 0))
+custom3TextBefore.insert(0, drop['custom3']['animabefore'])
 custom3TextBefore.bind("<KeyRelease>", custom3MatsDifference)
 
 custom3TextAfter = ttk.Entry(custom3Tab, width=12, validate='key', validatecommand=(vcmd, '%P'))
 custom3TextAfter.grid(column=1, columnspan=2, row=5)
-custom3TextAfter.insert(0, drop.get("custom3", {}).get("animaafter", 0))
+custom3TextAfter.insert(0, drop['custom3']['animaafter'])
 custom3TextAfter.bind("<KeyRelease>", custom3MatsDifference)
 
 # total custom4 raids
@@ -2107,14 +2127,14 @@ custom4mat5Button.bind('<Button-3>', lambda event: custom4TakeBack("mat5"))
 custom4resetButton = ttk.Button(custom4Tab, text="Reset", command=lambda:custom4resetCount(), width=12).grid(column=5, row=5)
 
 # custom4 Mat Count
-if drop.get("custom4", {}).get("animabefore", 0) == "" and drop.get("custom4", {}).get("animaafter", 0) =="":
+if drop['custom4']['animabefore'] == "" and drop['custom4']['animaafter'] =="":
     custom4SinceLabel = StringVar(value="Mats since:" + "\n" + "0")
-elif drop.get("custom4", {}).get("animabefore", 0) == "":
-    custom4SinceLabel = StringVar(value="Mats since:" + "\n" + str(abs(int(drop.get("custom4", {}).get("animaafter", 0)))))
-elif drop.get("custom4", {}).get("animaafter", 0) == "":
-    custom4SinceLabel = StringVar(value="Mats since:" + "\n" + str(abs(int(drop.get("custom4", {}).get("animabefore", 0)))))
+elif drop['custom4']['animabefore'] == "":
+    custom4SinceLabel = StringVar(value="Mats since:" + "\n" + str(abs(int(drop['custom4']['animaafter']))))
+elif drop['custom4']['animaafter'] == "":
+    custom4SinceLabel = StringVar(value="Mats since:" + "\n" + str(abs(int(drop['custom4']['animabefore']))))
 else:
-    custom4SinceLabel = StringVar(value="Mats since:" + "\n" + str(abs(int(drop.get("custom4", {}).get("animabefore", 0))-int(drop.get("custom4", {}).get("animaafter", 0)))))
+    custom4SinceLabel = StringVar(value="Mats since:" + "\n" + str(abs(int(drop['custom4']['animabefore'])-int(drop['custom4']['animaafter']))))
 
 def custom4MatsDifference(e):
     if custom4TextAfter.get() == "" and custom4TextBefore.get() == "":
@@ -2138,12 +2158,12 @@ custom4Text.grid(column=0, columnspan=2, row=5, sticky= tk.NW)
 
 custom4TextBefore = ttk.Entry(custom4Tab, width=12, validate='key', validatecommand=(vcmd, '%P'))
 custom4TextBefore.grid(column=1, columnspan=2, row=4)
-custom4TextBefore.insert(0, drop.get("custom4", {}).get("animabefore", 0))
+custom4TextBefore.insert(0, drop['custom4']['animabefore'])
 custom4TextBefore.bind("<KeyRelease>", custom4MatsDifference)
 
 custom4TextAfter = ttk.Entry(custom4Tab, width=12, validate='key', validatecommand=(vcmd, '%P'))
 custom4TextAfter.grid(column=1, columnspan=2, row=5)
-custom4TextAfter.insert(0, drop.get("custom4", {}).get("animaafter", 0))
+custom4TextAfter.insert(0, drop['custom4']['animaafter'])
 custom4TextAfter.bind("<KeyRelease>", custom4MatsDifference)
 
 # pbhl reset button
@@ -2171,14 +2191,14 @@ pbhlblueTextLabel.grid(column=0, columnspan=2, row=5, sticky=tk.W)
 
 #pbhlHornsDifference = StringVar(value="Dokkan")
 
-if drop.get("pbhl", {}).get("hornbefore", 0) == "" and drop.get("pbhl", {}).get("hornafter", 0) =="":
+if drop['pbhl']['hornbefore'] == "" and drop['pbhl']['hornafter'] =="":
     pbhlHornsSinceLabel = StringVar(value="Horns since:" + "\n" + "0")
-elif drop.get("pbhl", {}).get("hornbefore", 0) == "":
-    pbhlHornsSinceLabel = StringVar(value="Horns since:" + "\n" + str(abs(int(drop.get("pbhl", {}).get("hornafter", 0)))))
-elif drop.get("pbhl", {}).get("hornafter", 0) == "":
-    pbhlHornsSinceLabel = StringVar(value="Horns since:" + "\n" + str(abs(int(drop.get("pbhl", {}).get("hornbefore", 0)))))
+elif drop['pbhl']['hornbefore'] == "":
+    pbhlHornsSinceLabel = StringVar(value="Horns since:" + "\n" + str(abs(int(drop['pbhl']['hornafter']))))
+elif drop['pbhl']['hornafter'] == "":
+    pbhlHornsSinceLabel = StringVar(value="Horns since:" + "\n" + str(abs(int(drop['pbhl']['hornbefore']))))
 else:
-    pbhlHornsSinceLabel = StringVar(value="Horns since:" + "\n" + str(abs(int(drop.get("pbhl", {}).get("hornbefore", 0))-int(drop.get("pbhl", {}).get("hornafter", 0)))))
+    pbhlHornsSinceLabel = StringVar(value="Horns since:" + "\n" + str(abs(int(drop['pbhl']['hornbefore'])-int(drop['pbhl']['hornafter']))))
 
 def hornsDifference(e):
     if pbhlHornLastBarEntry.get() == "" and pbhlCurrentHornEntry.get() == "":
@@ -2203,23 +2223,23 @@ pbhlHornText.grid(column=2, columnspan=2, row=5, sticky= tk.NW)
 
 pbhlHornLastBarEntry = ttk.Entry(pbhlTab, width=15, validate='key', validatecommand=(vcmd, '%P'))
 pbhlHornLastBarEntry.grid(column=3, columnspan=2, row=4)
-pbhlHornLastBarEntry.insert(0, drop.get("pbhl", {}).get("hornbefore", 0))
+pbhlHornLastBarEntry.insert(0, drop['pbhl']['hornbefore'])
 pbhlHornLastBarEntry.bind("<KeyRelease>", hornsDifference)
 
 pbhlCurrentHornEntry = ttk.Entry(pbhlTab, width=15, validate='key', validatecommand=(vcmd, '%P'))
 pbhlCurrentHornEntry.grid(column=3, columnspan=2, row=5)
-pbhlCurrentHornEntry.insert(0, drop.get("pbhl", {}).get("hornafter", 0))
+pbhlCurrentHornEntry.insert(0, drop['pbhl']['hornafter'])
 pbhlCurrentHornEntry.bind("<KeyRelease>", hornsDifference)
 
 # Key Count
-if drop.get("akasha", {}).get("keybefore", 0) == "" and drop.get("akasha", {}).get("keyafter", 0) =="":
+if drop['akasha']['keybefore'] == "" and drop['akasha']['keyafter'] =="":
     keysSinceLabel = StringVar(value="Keys since:" + "\n" + "0")
-elif drop.get("akasha", {}).get("keybefore", 0) == "":
-    keysSinceLabel = StringVar(value="Keys since:" + "\n" + str(abs(int(drop.get("akasha", {}).get("keyafter", 0)))))
-elif drop.get("akasha", {}).get("keyafter", 0) == "":
-    keysSinceLabel = StringVar(value="Keys since:" + "\n" + str(abs(int(drop.get("akasha", {}).get("keybefore", 0)))))
+elif drop['akasha']['keybefore'] == "":
+    keysSinceLabel = StringVar(value="Keys since:" + "\n" + str(abs(int(drop['akasha']['keyafter']))))
+elif drop['akasha']['keyafter'] == "":
+    keysSinceLabel = StringVar(value="Keys since:" + "\n" + str(abs(int(drop['akasha']['keybefore']))))
 else:
-    keysSinceLabel = StringVar(value="Keys since:" + "\n" + str(abs(int(drop.get("akasha", {}).get("keybefore", 0))-int(drop.get("akasha", {}).get("keyafter", 0)))))
+    keysSinceLabel = StringVar(value="Keys since:" + "\n" + str(abs(int(drop['akasha']['keybefore'])-int(drop['akasha']['keyafter']))))
 
 
 def keysDifference(e):
@@ -2245,23 +2265,23 @@ keyText.grid(column=0, columnspan=2, row=5, sticky= tk.NW)
 
 keyTextBefore = ttk.Entry(akashaTab, width=12, validate='key', validatecommand=(vcmd, '%P'))
 keyTextBefore.grid(column=1, columnspan=2, row=4)
-keyTextBefore.insert(0, drop.get("akasha", {}).get("keybefore", 0))
+keyTextBefore.insert(0, drop['akasha']['keybefore'])
 keyTextBefore.bind("<KeyRelease>", keysDifference)
 
 keyTextAfter = ttk.Entry(akashaTab, width=12, validate='key', validatecommand=(vcmd, '%P'))
 keyTextAfter.grid(column=1, columnspan=2, row=5)
-keyTextAfter.insert(0, drop.get("akasha", {}).get("keyafter", 0))
+keyTextAfter.insert(0, drop['akasha']['keyafter'])
 keyTextAfter.bind("<KeyRelease>", keysDifference)
 
 # Azurite Count
-if drop.get("gohl", {}).get("azuritebefore", 0) == "" and drop.get("gohl", {}).get("azuriteafter", 0) =="":
+if drop['gohl']['azuritebefore'] == "" and drop['gohl']['azuriteafter'] =="":
     azuriteSinceLabel = StringVar(value="Azurite since:" + "\n" + "0")
-elif drop.get("gohl", {}).get("azuritebefore", 0) == "":
-    azuriteSinceLabel = StringVar(value="Azurite since:" + "\n" + str(abs(int(drop.get("gohl", {}).get("azuriteafter", 0)))))
-elif drop.get("gohl", {}).get("azuriteafter", 0) == "":
-    azuriteSinceLabel = StringVar(value="Azurite since:" + "\n" + str(abs(int(drop.get("gohl", {}).get("azuritebefore", 0)))))
+elif drop['gohl']['azuritebefore'] == "":
+    azuriteSinceLabel = StringVar(value="Azurite since:" + "\n" + str(abs(int(drop['gohl']['azuriteafter']))))
+elif drop['gohl']['azuriteafter'] == "":
+    azuriteSinceLabel = StringVar(value="Azurite since:" + "\n" + str(abs(int(drop['gohl']['azuritebefore']))))
 else:
-    azuriteSinceLabel = StringVar(value="Azurite since:" + "\n" + str(abs(int(drop.get("gohl", {}).get("azuritebefore", 0))-int(drop.get("gohl", {}).get("azuriteafter", 0)))))
+    azuriteSinceLabel = StringVar(value="Azurite since:" + "\n" + str(abs(int(drop['gohl']['azuritebefore'])-int(drop['gohl']['azuriteafter']))))
 
 
 def azuriteDifference(e):
@@ -2287,20 +2307,36 @@ azuriteText.grid(column=0, columnspan=2, row=5, sticky= tk.NW)
 
 azuriteTextBefore = ttk.Entry(gohlTab, width=12, validate='key', validatecommand=(vcmd, '%P'))
 azuriteTextBefore.grid(column=1, columnspan=2, row=4)
-azuriteTextBefore.insert(0, drop.get("gohl", {}).get("azuritebefore", 0))
+azuriteTextBefore.insert(0, drop['gohl']['azuritebefore'])
 azuriteTextBefore.bind("<KeyRelease>", azuriteDifference)
 
 azuriteTextAfter = ttk.Entry(gohlTab, width=12, validate='key', validatecommand=(vcmd, '%P'))
 azuriteTextAfter.grid(column=1, columnspan=2, row=5)
-azuriteTextAfter.insert(0, drop.get("gohl", {}).get("azuriteafter", 0))
+azuriteTextAfter.insert(0, drop['gohl']['azuriteafter'])
 azuriteTextAfter.bind("<KeyRelease>", azuriteDifference)
 
-tabControl.select(drop.get("settings", {}).get("resourceTab", 0))
-if drop.get("settings", {}).get("resourceTab", 0) == ".!notebook.!frame":
-    tabControlBar.select(drop.get("settings", {}).get("goldTab", 0))
-elif drop.get("settings", {}).get("resourceTab", 0) == ".!notebook.!frame2":
-    tabControlSand.select(drop.get("settings", {}).get("sandTab", 0))
+# settings tab
+themeString = StringVar(value="Theme")
+themeStringLight = StringVar(value="Light Theme")
+themeStringDark = StringVar(value="Dark Theme")
+
+settingsThemeTitle = ttk.Label(settingsTab, textvariable=themeString, justify="left")
+settingsThemeTitle.grid(column=0, columnspan=2, row=5, sticky= tk.NW)
+
+settingsThemeLightButton = ttk.Button(settingsTab, textvariable=themeStringLight)
+settingsThemeLightButton.bind('<Button-1>', lambda event: themeSetting("arc"))
+settingsThemeLightButton.grid(column=0, columnspan=2, row=6, sticky= tk.NW)
+
+settingsThemeLightButton = ttk.Button(settingsTab, textvariable=themeStringDark)
+settingsThemeLightButton.bind('<Button-1>', lambda event: themeSetting("black"))
+settingsThemeLightButton.grid(column=3, columnspan=2, row=6, sticky= tk.NW)
+
+tabControl.select(drop["settings"]["resourceTab"])
+if drop["settings"]["resourceTab"] == ".!notebook.!frame":
+    tabControlBar.select(drop["settings"]["goldTab"])
+elif drop["settings"]["resourceTab"] == ".!notebook.!frame2":
+    tabControlSand.select(drop["settings"]["sandTab"])
 else:
-    tabControlCustom.select(drop.get("settings", {}).get("customTab", 0))
+    tabControlCustom.select(drop["settings"]["customTab"])
 
 root.mainloop()

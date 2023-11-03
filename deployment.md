@@ -1,6 +1,6 @@
 # Deployment
 
-## Compiling using pyinstaller
+## Windows deployment
 ```powershell
 pyinstaller --onefile --windowed -i "PathToIcon" trackerLight.py
 Copy-Item .\img\ .\dist\ -Recurse

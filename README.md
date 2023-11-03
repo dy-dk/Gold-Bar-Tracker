@@ -8,6 +8,7 @@ a rewrite of the gold-bar-tracker to be multiplatform and do a few more things
 1. setup a venv
 2. install python3-tk 
 3. pip install -r requirements.txt
+4. run the script with python
 
 # Gold-Bar-Tracker
 
