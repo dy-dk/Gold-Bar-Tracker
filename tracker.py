@@ -2325,8 +2325,8 @@ azuriteTextAfter.bind("<KeyRelease>", azuriteDifference)
 
 # settings tab
 settingsThemeString = StringVar(value="Change Theme")
-settingsThemeStringLight = StringVar(value="Swap to Light Theme")
-settingsThemeStringDark = StringVar(value="Swap to Dark Theme")
+settingsThemeStringDark = StringVar(value="Swap to Light Theme")
+settingsThemeStringLight = StringVar(value="Swap to Dark Theme")
 
 settingsThemeTitle = ttk.Label(settingsTab, textvariable=settingsThemeString, justify="left")
 settingsThemeTitle.grid(column=0, columnspan=2, row=5, sticky= tk.NW)
