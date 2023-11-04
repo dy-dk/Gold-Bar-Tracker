@@ -1,5 +1,10 @@
 # personal venv
 env/*
 
-# Persistent undo
+# pyinstaller generated files
+build/*
+dist/*
+*.spec
+
+# Persistent undo (vim)
 [._]*.un~
