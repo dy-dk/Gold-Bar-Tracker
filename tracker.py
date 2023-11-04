@@ -1304,7 +1304,7 @@ def custom4resetCount():
 def themeToggle(currentTheme):
     match currentTheme:
         case "black":
-            themeSetting("clearlooks")
+            themeSetting("arc")
             settingsThemeToggleButton.configure(textvariable=settingsThemeStringLight)
         case "clearlook":
             themeSetting("black")
@@ -2334,7 +2334,7 @@ settingsThemeTitle.grid(column=0, columnspan=2, row=5, sticky= tk.NW)
 settingsThemeToggleButton = ttk.Button(settingsTab)
 if theme.get() == "black":
     settingsThemeToggleButton.configure(textvariable=settingsThemeStringDark)
-elif theme.get() == "clearlooks":
+elif theme.get() == "arc":
     settingsThemeToggleButton.configure(textvariable=settingsThemeStringLight)
 settingsThemeToggleButton.bind('<Button-1>', lambda event: themeToggle(theme.get()))
 settingsThemeToggleButton.grid(column=0, columnspan=2, row=6, sticky= tk.NW)
