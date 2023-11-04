@@ -1,15 +1,3 @@
-# gold-bar-tracker
-
-original readme below
-
-a rewrite of the gold-bar-tracker to be multiplatform and do a few more things
-
-## running instructions for devs
-1. setup a venv
-2. install python3-tk 
-3. pip install -r requirements.txt
-4. run the script with python
-
 # Gold-Bar-Tracker
 
 Very Cool Gold Bar Tracker that now tracks Sands and custom stuff also.
@@ -34,11 +22,9 @@ If updating from a previous version, replace the data.json file in the zip with 
 
 ---------------
 
-Go to the latest release on the sidebar and download the zip file for the compiled .exe files
+Go to the latest release on the sidebar and download the zip file for the compiled .exe files for Windows users.
 
-Use trackerLight.exe for a light theme.
-
-Use trackerDark.exe for a dark theme.
+Launch tracker.exe and change theme in settings tab. By default it will be in dark mode.
 
 ---------------
 
