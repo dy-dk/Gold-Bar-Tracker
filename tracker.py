@@ -47,7 +47,14 @@ def callBack(input):
         return False
 vcmd = root.register(callBack)
 
-theme = StringVar(value=drop['settings']['theme'])
+try:
+    drop['settings']['theme']
+except KeyError:
+    drop['settings']['theme'] = 'black';
+    theme = StringVar(value=drop['settings']['theme'])
+else:
+    theme = StringVar(value=drop['settings']['theme'])
+
 style = ThemedStyle(root)
 style.set_theme(theme.get())
 
