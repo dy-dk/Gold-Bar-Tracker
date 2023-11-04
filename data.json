@@ -1,9 +1,11 @@
 {
     "settings": {
-        "resourceTab": ".!notebook.!frame",
+        "resourceTab": ".!notebook.!frame4",
         "goldTab": ".!notebook.!frame.!notebook.!frame",
         "sandTab": ".!notebook.!frame2.!notebook.!frame",
-        "customTab": ".!notebook.!frame3.!notebook.!frame"
+        "customTab": ".!notebook.!frame3.!notebook.!frame",
+        "settingsTab": "",
+        "theme": "black"
     },
     "pbhl": {
         "raid": 0,

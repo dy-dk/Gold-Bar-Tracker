@@ -22,11 +22,9 @@ If updating from a previous version, replace the data.json file in the zip with 
 
 ---------------
 
-Go to the latest release on the sidebar and download the zip file for the compiled .exe files
+Go to the latest release on the sidebar and download the zip file for the compiled .exe files for Windows users.
 
-Use trackerLight.exe for a light theme.
-
-Use trackerDark.exe for a dark theme.
+Launch tracker.exe and change theme in settings tab. By default it will be in dark mode.
 
 ---------------
 
