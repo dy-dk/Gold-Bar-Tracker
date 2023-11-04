@@ -1301,6 +1301,18 @@ def custom4resetCount():
         return
     saveData()
 
+def themeToggle(currentTheme):
+    match currentTheme:
+        case "black":
+            themeSetting("clearlooks")
+            settingsThemeToggleButton.configure(textvariable=settingsThemeStringLight)
+        case "clearlook":
+            themeSetting("black")
+            settingsThemeToggleButton.configure(textvariable=settingsThemeStringDark)
+        case _:
+            themeSetting("black")
+            settingsThemeToggleButton.configure(textvariable=settingsThemeStringDark)
+
 def themeSetting(themeColor):
     theme.set(themeColor)
     style.set_theme(theme.get())
@@ -2312,20 +2324,20 @@ azuriteTextAfter.insert(0, drop['gohl']['azuriteafter'])
 azuriteTextAfter.bind("<KeyRelease>", azuriteDifference)
 
 # settings tab
-themeString = StringVar(value="Theme")
-themeStringLight = StringVar(value="Light Theme")
-themeStringDark = StringVar(value="Dark Theme")
+settingsThemeString = StringVar(value="Change Theme")
+settingsThemeStringLight = StringVar(value="Swap to Light Theme")
+settingsThemeStringDark = StringVar(value="Swap to Dark Theme")
 
-settingsThemeTitle = ttk.Label(settingsTab, textvariable=themeString, justify="left")
+settingsThemeTitle = ttk.Label(settingsTab, textvariable=settingsThemeString, justify="left")
 settingsThemeTitle.grid(column=0, columnspan=2, row=5, sticky= tk.NW)
 
-settingsThemeLightButton = ttk.Button(settingsTab, textvariable=themeStringLight)
-settingsThemeLightButton.bind('<Button-1>', lambda event: themeSetting("arc"))
-settingsThemeLightButton.grid(column=0, columnspan=2, row=6, sticky= tk.NW)
-
-settingsThemeLightButton = ttk.Button(settingsTab, textvariable=themeStringDark)
-settingsThemeLightButton.bind('<Button-1>', lambda event: themeSetting("black"))
-settingsThemeLightButton.grid(column=3, columnspan=2, row=6, sticky= tk.NW)
+settingsThemeToggleButton = ttk.Button(settingsTab)
+if theme.get() == "black":
+    settingsThemeToggleButton.configure(textvariable=settingsThemeStringDark)
+elif theme.get() == "clearlooks":
+    settingsThemeToggleButton.configure(textvariable=settingsThemeStringLight)
+settingsThemeToggleButton.bind('<Button-1>', lambda event: themeToggle(theme.get()))
+settingsThemeToggleButton.grid(column=0, columnspan=2, row=6, sticky= tk.NW)
 
 tabControl.select(drop["settings"]["resourceTab"])
 if drop["settings"]["resourceTab"] == ".!notebook.!frame":
