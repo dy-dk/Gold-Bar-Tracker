@@ -1,12 +1,4 @@
 {
-    "settings": {
-        "resourceTab": ".!notebook.!frame4",
-        "goldTab": ".!notebook.!frame.!notebook.!frame",
-        "sandTab": ".!notebook.!frame2.!notebook.!frame",
-        "customTab": ".!notebook.!frame3.!notebook.!frame",
-        "settingsTab": "",
-        "theme": "black"
-    },
     "pbhl": {
         "raid": 0,
         "noblue": 0,
@@ -14,8 +6,8 @@
         "lineagering": 0,
         "intricacyring": 0,
         "goldbar": 0,
-        "hornbefore": "",
-        "hornafter": ""
+        "hornbefore": 0,
+        "hornafter": 0
     },
     "akasha": {
         "raid": 0,
@@ -24,8 +16,8 @@
         "lineagering": 0,
         "intricacyring": 0,
         "goldbar": 0,
-        "keybefore": "",
-        "keyafter": ""
+        "keybefore": 0,
+        "keyafter": 0
     },
     "gohl": {
         "raid": 0,
@@ -34,31 +26,31 @@
         "lineagering": 0,
         "intricacyring": 0,
         "goldbar": 0,
-        "azuritebefore": "",
-        "azuriteafter": ""
+        "azuritebefore": 0,
+        "azuriteafter": 0
     },
     "dragon": {
         "raid": 0,
         "trash": 0,
         "earring": 0,
         "sand": 0,
-        "animabefore": "",
-        "animaafter": ""
+        "animabefore": 0,
+        "animaafter": 0
     },
     "revans": {
         "raid": 0,
         "trash": 0,
         "weapon": 0,
         "sand": 0,
-        "animabefore": "",
-        "animaafter": ""
+        "animabefore": 0,
+        "animaafter": 0
     },
     "subhl": {
         "raid": 0,
         "trash": 0,
         "sand": 0,
-        "animabefore": "",
-        "animaafter": ""
+        "animabefore": 0,
+        "animaafter": 0
     },
     "custom1": {
         "raid": 0,
@@ -67,8 +59,8 @@
         "mat3": 0,
         "mat4": 0,
         "mat5": 0,
-        "animabefore": "",
-        "animaafter": ""
+        "animabefore": 0,
+        "animaafter": 0
     },
     "custom2": {
         "raid": 0,
@@ -77,8 +69,8 @@
         "mat3": 0,
         "mat4": 0,
         "mat5": 0,
-        "animabefore": "",
-        "animaafter": ""
+        "animabefore": 0,
+        "animaafter": 0
     },
     "custom3": {
         "raid": 0,
@@ -87,8 +79,8 @@
         "mat3": 0,
         "mat4": 0,
         "mat5": 0,
-        "animabefore": "",
-        "animaafter": ""
+        "animabefore": 0,
+        "animaafter": 0
     },
     "custom4": {
         "raid": 0,
@@ -97,7 +89,7 @@
         "mat3": 0,
         "mat4": 0,
         "mat5": 0,
-        "animabefore": "",
-        "animaafter": ""
+        "animabefore": 0,
+        "animaafter": 0
     }
 }

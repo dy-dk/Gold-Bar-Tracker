@@ -8,3 +8,6 @@ dist/*
 
 # Persistent undo (vim)
 [._]*.un~
+
+# python cache
+__pycache__
